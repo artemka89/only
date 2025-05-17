@@ -22,7 +22,7 @@ export const Diagram: FC<CircleDiagramProps> = ({
   const arc = 360 / items.length;
 
   return (
-    <div className={clsx(className, styles.diagramItem)}>
+    <ul className={clsx(className, styles.diagramItem)}>
       {items.map((item, index) => {
         const angle = arc * index - activeItemIndex * arc + OFFSET_DEG_DIAGRAM;
 
@@ -31,7 +31,7 @@ export const Diagram: FC<CircleDiagramProps> = ({
         };
 
         return (
-          <div key={index} className={styles.pointWrapper} style={style}>
+          <li key={index} className={styles.pointWrapper} style={style}>
             <button
               onClick={() => setActiveIndex(index)}
               className={clsx(styles.pointButton, {
@@ -48,9 +48,9 @@ export const Diagram: FC<CircleDiagramProps> = ({
             >
               {item.title}
             </p>
-          </div>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 };
