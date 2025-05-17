@@ -23,7 +23,7 @@
       transition: background 0.3s ease-in-out;
 
       &.active {
-        background: rgba(var(--color-line), 1);
+        background: rgba(var(--color-secondary), 1);
       }
     }
   }

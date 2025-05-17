@@ -8,8 +8,8 @@
     height: 50px;
     background: transparent;
     border-radius: 50%;
-    color: rgba(var(--color-line), 0.5);
-    border: 1px solid rgba(var(--color-line), 0.5);
+    color: rgba(var(--color-secondary), 0.5);
+    border: 1px solid rgba(var(--color-secondary), 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,8 +31,8 @@
 
     @media (hover: hover) {
       &:hover {
-        color: rgba(var(--color-line), 1);
-        border-color: rgba(var(--color-line), 1);
+        color: rgba(var(--color-secondary), 1);
+        border-color: rgba(var(--color-secondary), 1);
       }
     }
   }
