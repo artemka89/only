@@ -1,0 +1,98 @@
+.gallery {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .galleryContainer {
+    width: 100%;
+
+    .slide {
+      width: 320px;
+      height: 135px;
+
+      @media screen and (max-width: 830px) {
+        width: 230px;
+        height: 192px;
+      }
+    }
+  }
+
+  .prevButton,
+  .nextButton {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    color: rgba(var(--color-primary), 0.5);
+    box-shadow: 0px 0px 15px 2px rgba(var(--color-primary), 0.3);
+    opacity: 1;
+    z-index: 100;
+    transition:
+      color 0.3s ease-in-out,
+      border 0.3s ease-in-out,
+      opacity 0.3s ease-in-out;
+    cursor: pointer;
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      color: inherit;
+    }
+
+    &:disabled {
+      opacity: 0;
+      cursor: default;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        color: rgba(var(--color-primary), 1);
+      }
+    }
+
+    @media screen and (max-width: 830px) {
+      display: none;
+    }
+  }
+
+  .prevButton {
+    left: -60px;
+  }
+
+  .nextButton {
+    right: -60px;
+  }
+}
+
+.separator {
+  position: absolute;
+  top: -20px;
+  @media screen and (min-width: 830px) {
+    display: none;
+  }
+}
+
+.diagramTitle {
+  position: absolute;
+  top: -50px;
+  color: rgba(var(--color-line), 1);
+  font-size: 16px;
+  font-weight: 700;
+
+  @media screen and (max-width: 830px) {
+    font-size: 20px;
+  }
+
+  @media screen and (max-width: 520px) {
+    font-size: 16px;
+  }
+
+  @media screen and (min-width: 830px) {
+    display: none;
+  }
+}

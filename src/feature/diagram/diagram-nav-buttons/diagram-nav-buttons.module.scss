@@ -1,0 +1,43 @@
+.navButtons {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+
+  .navButton {
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 50%;
+    color: rgba(var(--color-line), 0.5);
+    border: 1px solid rgba(var(--color-line), 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      color 0.3s ease-in-out,
+      border 0.3s ease-in-out;
+    cursor: pointer;
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      color: inherit;
+    }
+
+    @media screen and (max-width: 830px) {
+      width: 25px;
+      height: 25px;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        color: rgba(var(--color-line), 1);
+        border-color: rgba(var(--color-line), 1);
+      }
+    }
+  }
+
+  @media screen and (max-width: 830px) {
+    column-gap: 8px;
+  }
+}

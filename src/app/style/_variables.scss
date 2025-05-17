@@ -1,0 +1,27 @@
+:root {
+  --font-family: 'Inter', sans-serif;
+
+  --max-screen: calc(var(--screen-width) + var(--screen-padding) * 2);
+  --screen-width: 1440px;
+  --screen-padding: 20px;
+  --screen-desktop: 1440px;
+  --screen-tablet: 1180px;
+  --screen-mobile: 480px;
+
+  --color-line: 66, 86, 122;
+  --color-primary: 56, 119, 238;
+  --circle-size: 530px;
+  --angle: 0deg;
+}
+
+@media (max-width: 1180px) {
+  :root {
+    --screen-width: var(--screen-tablet);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --screen-width: var(--screen-mobile);
+  }
+}

@@ -1,0 +1,17 @@
+@use '_normalize';
+@use '_variables';
+
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-style: normal;
+}
+
+.container {
+  max-width: var(--screen-width);
+  margin: 0 auto;
+  padding: 0 var(--screen-padding);
+}

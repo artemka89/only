@@ -1,0 +1,31 @@
+.diagramPagination {
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+
+  .paginationButton {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    .paginationDote {
+      width: 6px;
+      height: 6px;
+      background: #ccc;
+      border-radius: 50%;
+      transition: background 0.3s ease-in-out;
+
+      &.active {
+        background: rgba(var(--color-line), 1);
+      }
+    }
+  }
+}

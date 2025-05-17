@@ -1,0 +1,34 @@
+.item {
+  width: 100%;
+
+  .title {
+    margin-bottom: 15px;
+    color: rgba(var(--color-primary), 1);
+    font-size: 28px;
+    font-weight: 600;
+
+    @media screen and (max-width: 830px) {
+      font-size: 20px;
+    }
+
+    @media screen and (max-width: 520) {
+      font-size: 16px;
+    }
+  }
+
+  .text {
+    margin: 0;
+    color: rgba(var(--color-line), 1);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.5;
+
+    @media screen and (max-width: 830px) {
+      font-size: 16px;
+    }
+
+    @media screen and (max-width: 520px) {
+      font-size: 14px;
+    }
+  }
+}
