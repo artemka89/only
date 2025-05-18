@@ -1,0 +1,10 @@
+.diagramTitle {
+  margin: 0;
+  color: rgba(var(--color-secondary), 1);
+  font-size: 20px;
+  font-weight: 700;
+
+  @media screen and (max-width: 520px) {
+    font-size: 16px;
+  }
+}

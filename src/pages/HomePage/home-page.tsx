@@ -3,26 +3,31 @@ import { type FC, useState } from 'react';
 import {
   Diagram,
   DiagramNavButtons,
-  DiagramPagination
+  DiagramPagination,
+  DiagramTitle
 } from '@/feature/diagram';
 import { Gallery } from '@/feature/gallery';
 import { useMediaQuery } from '@/shared/api/hooks/useMediaQuery';
 import { mockData } from '@/shared/api/mockData';
 import { AnimatedYear } from '@/shared/lib/animatedNumber';
+import { FadeInContainer } from '@/shared/ui/fade-in-container/fade-in-container';
+import { Separator } from '@/shared/ui/separator';
 
 import styles from './home-page.module.scss';
 
 export const HomePage: FC = () => {
   const [activeDiagramPointIndex, setActiveDiagramPointIndex] = useState(0);
+  const selectedData = mockData[activeDiagramPointIndex];
+
   const [prevYears, setPrevYears] = useState(() =>
-    mockData[activeDiagramPointIndex].years.map((item) => item - 20)
+    selectedData.years.map((item) => item - 20)
   );
 
   const isMobile = useMediaQuery('(max-width: 830px)');
 
   const handleChangeDiagram = (index: number) => {
     setActiveDiagramPointIndex(index);
-    setPrevYears(mockData[activeDiagramPointIndex].years);
+    setPrevYears(selectedData.years);
   };
 
   const handleArrowClick = (direction: 'left' | 'right') => {
@@ -35,7 +40,7 @@ export const HomePage: FC = () => {
         prevIndex === mockData.length - 1 ? 0 : prevIndex + 1
       );
     }
-    setPrevYears(mockData[activeDiagramPointIndex].years);
+    setPrevYears(selectedData.years);
   };
 
   return (
@@ -48,12 +53,12 @@ export const HomePage: FC = () => {
         <div className={styles.years}>
           <AnimatedYear
             start={prevYears[0]}
-            end={mockData[activeDiagramPointIndex].years[0]}
+            end={selectedData.years[0]}
             className={styles.year}
           />
           <AnimatedYear
             start={prevYears[1]}
-            end={mockData[activeDiagramPointIndex].years[1]}
+            end={selectedData.years[1]}
             className={styles.year}
           />
         </div>
@@ -72,20 +77,30 @@ export const HomePage: FC = () => {
             </p>
             <DiagramNavButtons onClick={handleArrowClick} />
           </div>
-          <Gallery
-            items={mockData[activeDiagramPointIndex].items}
-            className={styles.gallery}
-            title={mockData[activeDiagramPointIndex].title}
-          />
+          <FadeInContainer
+            dependencies={selectedData.items}
+            className={styles.fadeInContainer}
+          >
+            {isMobile && (
+              <>
+                <DiagramTitle
+                  className={styles.diagramTitle}
+                  value={selectedData.title}
+                />
+                <Separator className={styles.separator} />
+              </>
+            )}
+            <Gallery items={selectedData.items} />
+          </FadeInContainer>
+          {isMobile && (
+            <DiagramPagination
+              items={mockData}
+              activeIndex={activeDiagramPointIndex}
+              onChangeIndex={handleChangeDiagram}
+              className={styles.diagramPagination}
+            />
+          )}
         </div>
-        {isMobile && (
-          <DiagramPagination
-            items={mockData}
-            activeIndex={activeDiagramPointIndex}
-            onChangeIndex={handleChangeDiagram}
-            className={styles.diagramPagination}
-          />
-        )}
       </div>
     </main>
   );

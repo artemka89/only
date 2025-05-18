@@ -1,4 +1,4 @@
-import { type FC, useRef, useState } from 'react';
+import { type FC, useLayoutEffect, useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import clsx from 'clsx';
@@ -8,7 +8,6 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 
 import { useMediaQuery } from '@/shared/api/hooks/useMediaQuery';
 import { GalleryItemType } from '@/shared/api/types';
-import { Separator } from '@/shared/ui/separator';
 
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -23,11 +22,10 @@ gsap.registerPlugin(useGSAP);
 
 interface GalleryProps {
   items: GalleryItemType[];
-  title?: string;
   className?: string;
 }
 
-export const Gallery: FC<GalleryProps> = ({ items, title, className }) => {
+export const Gallery: FC<GalleryProps> = ({ items, className }) => {
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
@@ -48,31 +46,12 @@ export const Gallery: FC<GalleryProps> = ({ items, title, className }) => {
     }
   };
 
-  useGSAP(
-    () => {
-      gsap.fromTo(
-        containerRef.current,
-        {
-          opacity: 0,
-          duration: 1,
-          y: 30,
-          onComplete: () => swiperRef.current?.swiper.slideTo(0, 0)
-        },
-
-        {
-          opacity: 1,
-          duration: 1,
-          y: 0
-        }
-      );
-    },
-    { dependencies: [items], scope: containerRef }
-  );
+  useLayoutEffect(() => {
+    swiperRef.current?.swiper.slideTo(0, 0);
+  }, [items]);
 
   return (
     <div ref={containerRef} className={clsx(className, styles.gallery)}>
-      <p className={styles.diagramTitle}>{title}</p>
-      <Separator className={styles.separator} />
       <button
         disabled={isBeginning}
         className={styles.prevButton}

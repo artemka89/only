@@ -4,6 +4,8 @@ import clsx from 'clsx';
 import { DataType } from '@/shared/api/types';
 import { OFFSET_DEG_DIAGRAM } from '@/shared/constants';
 
+import { DiagramTitle } from '../diagram-title/diagram-title';
+
 import styles from './diagram.module.scss';
 
 interface CircleDiagramProps {
@@ -41,13 +43,12 @@ export const Diagram: FC<CircleDiagramProps> = ({
               <div className={styles.pointСircle} />
               <span className={styles.pointNumber}>{index + 1}</span>
             </button>
-            <p
+            <DiagramTitle
+              value={item.title}
               className={clsx(styles.pointTitle, {
-                [styles.active]: activeItemIndex === index
+                [styles.visible]: activeItemIndex === index
               })}
-            >
-              {item.title}
-            </p>
+            />
           </li>
         );
       })}
