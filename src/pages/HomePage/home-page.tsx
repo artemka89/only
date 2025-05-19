@@ -80,7 +80,7 @@ export const HomePage: FC = () => {
             <DiagramNavButtons onClick={handleArrowClick} />
           </div>
           <FadeInContainer
-            dependencies={selectedData.items}
+            dependencies={[selectedData.items]}
             className={styles.fadeInContainer}
           >
             {isMobile && (
