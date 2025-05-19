@@ -8,16 +8,18 @@ import {
 } from '@/feature/diagram';
 import { Gallery } from '@/feature/gallery';
 import { useMediaQuery } from '@/shared/api/hooks/useMediaQuery';
-import { mockData } from '@/shared/api/mockData';
-import { AnimatedYear } from '@/shared/lib/animatedNumber';
+import { generateData } from '@/shared/api/mockData';
+import { AnimatedDigit } from '@/shared/ui/animated-digit';
 import { FadeInContainer } from '@/shared/ui/fade-in-container/fade-in-container';
 import { Separator } from '@/shared/ui/separator';
 
 import styles from './home-page.module.scss';
 
 export const HomePage: FC = () => {
+  const data = generateData();
+
   const [activeDiagramPointIndex, setActiveDiagramPointIndex] = useState(0);
-  const selectedData = mockData[activeDiagramPointIndex];
+  const selectedData = data[activeDiagramPointIndex];
 
   const [prevYears, setPrevYears] = useState(() =>
     selectedData.years.map((item) => item - 20)
@@ -33,11 +35,11 @@ export const HomePage: FC = () => {
   const handleArrowClick = (direction: 'left' | 'right') => {
     if (direction === 'left') {
       setActiveDiagramPointIndex((prevIndex) =>
-        prevIndex === 0 ? mockData.length - 1 : prevIndex - 1
+        prevIndex === 0 ? data.length - 1 : prevIndex - 1
       );
     } else {
       setActiveDiagramPointIndex((prevIndex) =>
-        prevIndex === mockData.length - 1 ? 0 : prevIndex + 1
+        prevIndex === data.length - 1 ? 0 : prevIndex + 1
       );
     }
     setPrevYears(selectedData.years);
@@ -51,20 +53,20 @@ export const HomePage: FC = () => {
           <h1 className={styles.headerTitle}>Исторические даты</h1>
         </div>
         <div className={styles.years}>
-          <AnimatedYear
-            start={prevYears[0]}
-            end={selectedData.years[0]}
+          <AnimatedDigit
+            from={prevYears[0]}
+            to={selectedData.years[0]}
             className={styles.year}
           />
-          <AnimatedYear
-            start={prevYears[1]}
-            end={selectedData.years[1]}
+          <AnimatedDigit
+            from={prevYears[1]}
+            to={selectedData.years[1]}
             className={styles.year}
           />
         </div>
         {!isMobile && (
           <Diagram
-            items={mockData}
+            items={data}
             activeItemIndex={activeDiagramPointIndex}
             setActiveIndex={handleChangeDiagram}
           />
@@ -73,7 +75,7 @@ export const HomePage: FC = () => {
           <div className={styles.diagramControls}>
             <p className={styles.count}>
               {String(activeDiagramPointIndex + 1).padStart(2, '0')}/
-              {String(mockData.length).padStart(2, '0')}
+              {String(data.length).padStart(2, '0')}
             </p>
             <DiagramNavButtons onClick={handleArrowClick} />
           </div>
@@ -94,7 +96,7 @@ export const HomePage: FC = () => {
           </FadeInContainer>
           {isMobile && (
             <DiagramPagination
-              items={mockData}
+              items={data}
               activeIndex={activeDiagramPointIndex}
               onChangeIndex={handleChangeDiagram}
               className={styles.diagramPagination}

@@ -9,6 +9,9 @@
     .slide {
       width: 320px;
       height: 135px;
+      // &:last-child {
+      //   margin-right: 0 !important;
+      // }
 
       @media screen and (max-width: 830px) {
         width: 230px;

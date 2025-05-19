@@ -7,6 +7,6 @@ export interface DataType {
 
 export interface GalleryItemType {
   id: string;
-  title: string;
+  year: number;
   text: string;
 }

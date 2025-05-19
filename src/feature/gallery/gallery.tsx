@@ -1,8 +1,6 @@
 import { type FC, useLayoutEffect, useRef, useState } from 'react';
-import { useGSAP } from '@gsap/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import clsx from 'clsx';
-import gsap from 'gsap';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 
@@ -18,8 +16,6 @@ import { GalleryItem } from './gallery-item/gallery-item';
 import 'swiper/css';
 import styles from './gallery.module.scss';
 
-gsap.registerPlugin(useGSAP);
-
 interface GalleryProps {
   items: GalleryItemType[];
   className?: string;
@@ -30,7 +26,6 @@ export const Gallery: FC<GalleryProps> = ({ items, className }) => {
   const [isEnd, setIsEnd] = useState(false);
 
   const swiperRef = useRef<SwiperRef>(null);
-  const containerRef = useRef<HTMLDivElement | null>(null);
 
   const isMobile = useMediaQuery('(max-width: 1024px)');
 
@@ -51,7 +46,7 @@ export const Gallery: FC<GalleryProps> = ({ items, className }) => {
   }, [items]);
 
   return (
-    <div ref={containerRef} className={clsx(className, styles.gallery)}>
+    <div className={clsx(className, styles.gallery)}>
       <button
         disabled={isBeginning}
         className={styles.prevButton}
@@ -63,7 +58,6 @@ export const Gallery: FC<GalleryProps> = ({ items, className }) => {
         ref={swiperRef}
         className={styles.galleryContainer}
         modules={[Navigation]}
-        pagination={{ clickable: true }}
         spaceBetween={isMobile ? 20 : 80}
         slidesPerView='auto'
         onSlideChange={(swiper) => {
@@ -77,7 +71,11 @@ export const Gallery: FC<GalleryProps> = ({ items, className }) => {
       >
         {items.map((item) => (
           <SwiperSlide key={item.id} className={styles.slide}>
-            <GalleryItem key={item.title} title={item.title} text={item.text} />
+            <GalleryItem
+              key={item.year}
+              title={item.year.toString()}
+              text={item.text}
+            />
           </SwiperSlide>
         ))}
       </Swiper>
